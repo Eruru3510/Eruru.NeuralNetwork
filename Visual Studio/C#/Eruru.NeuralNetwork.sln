@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Eruru.NeuralNetwork For Shared Project", "Eruru.NeuralNetwork For Shared Project\Eruru.NeuralNetwork For Shared Project.shproj", "{55BAC478-69B9-43A6-A0D5-6BCDE63E2B0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{1125ED1B-6557-438C-B99E-D9C3569F78E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eruru.NeuralNetwork_For_.NET_Framework_4.0", "Eruru.NeuralNetwork For .NET Framework 4.0\Eruru.NeuralNetwork_For_.NET_Framework_4.0.csproj", "{0EADC688-2260-4761-837D-2CA1454E06FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{07BA1C8C-73D0-40B6-9ADA-18B7BB456E62}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Eruru.NeuralNetwork For Shared Project\Eruru.NeuralNetwork For Shared Project.projitems*{0eadc688-2260-4761-837d-2ca1454e06ff}*SharedItemsImports = 4
+		Eruru.NeuralNetwork For Shared Project\Eruru.NeuralNetwork For Shared Project.projitems*{55bac478-69b9-43a6-a0d5-6bcde63e2b0b}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1125ED1B-6557-438C-B99E-D9C3569F78E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1125ED1B-6557-438C-B99E-D9C3569F78E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1125ED1B-6557-438C-B99E-D9C3569F78E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1125ED1B-6557-438C-B99E-D9C3569F78E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EADC688-2260-4761-837D-2CA1454E06FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EADC688-2260-4761-837D-2CA1454E06FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EADC688-2260-4761-837D-2CA1454E06FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EADC688-2260-4761-837D-2CA1454E06FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07BA1C8C-73D0-40B6-9ADA-18B7BB456E62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07BA1C8C-73D0-40B6-9ADA-18B7BB456E62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07BA1C8C-73D0-40B6-9ADA-18B7BB456E62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07BA1C8C-73D0-40B6-9ADA-18B7BB456E62}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7E5D53A-7F30-4374-97AF-46CF6327F9D4}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>55bac478-69b9-43a6-a0d5-6bcde63e2b0b</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Eruru.NeuralNetwork</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Kernel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetwork.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkActivationFunction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkConv2DLayer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkDataFormatType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkDenseLayer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkDropoutLayer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkFlattenLayer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkLayer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkLayerType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkMaxPooling2DLayer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkPaddingType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Neuron.cs" />
+  </ItemGroup>
+</Project>
