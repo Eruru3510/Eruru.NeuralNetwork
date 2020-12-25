@@ -26,7 +26,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -50,9 +50,9 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Eruru.NeuralNetwork For .NET Framework 4.0\Eruru.NeuralNetwork_For_.NET_Framework_4.0.csproj">
+    <ProjectReference Include="..\Eruru.NeuralNetwork For .NET Framework 4\Eruru.NeuralNetwork_For_.NET_Framework_4.csproj">
       <Project>{0eadc688-2260-4761-837d-2ca1454e06ff}</Project>
-      <Name>Eruru.NeuralNetwork_For_.NET_Framework_4.0</Name>
+      <Name>Eruru.NeuralNetwork_For_.NET_Framework_4</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

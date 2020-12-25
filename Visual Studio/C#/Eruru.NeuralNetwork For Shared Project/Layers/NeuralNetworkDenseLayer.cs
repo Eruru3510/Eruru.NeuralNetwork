@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 
 namespace Eruru.NeuralNetwork {
 
-	public class NeuralNetworkDenseLayer : NeuralNetworkLayer {
+	public class NeuralNetworkDenseLayer : NeuralNetworkLayerBase {
 
 		public NeuralNetworkActivationFunctionType ActivationFunctionType { get; set; }
 		public Neuron[] Neurons { get; set; }
 
-		public NeuralNetworkDenseLayer (Neuron[] neurons, int[] inputShape, int[] outputShape, NeuralNetworkActivationFunctionType activationFunctionType) : base (inputShape, outputShape) {
+		public NeuralNetworkDenseLayer (int[] inputShape, int[] outputShape, Neuron[] neurons, NeuralNetworkActivationFunctionType activationFunctionType) : base (inputShape, outputShape) {
 			if (inputShape is null) {
 				throw new ArgumentNullException (nameof (inputShape));
 			}
@@ -36,9 +36,9 @@ namespace Eruru.NeuralNetwork {
 						outputs[i] = (float)Math.Exp (outputs[i] - max);
 						sum += outputs[i];
 					};
-					Parallel.For (0, outputs.Length, i => {
+					for (int i = 0; i < outputs.Length; i++) {
 						outputs[i] = outputs[i] / sum;
-					});
+					}
 					break;
 				}
 				default:

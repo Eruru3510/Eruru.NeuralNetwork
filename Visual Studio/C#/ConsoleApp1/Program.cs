@@ -1,42 +1,47 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using Eruru.NeuralNetwork;
 
 namespace ConsoleApp1 {
 
 	class Program {
 
-		static NeuralNetwork NeuralNetwork = new NeuralNetwork ();
+		static readonly NeuralNetwork NeuralNetwork = new NeuralNetwork ();
+		static readonly string AssetsPath = @"..\..\..\Assets\";
+		static readonly string H5Path = $@"{AssetsPath}Keras Mnist CNN.h5";
+		static readonly string JsonPath = $@"{AssetsPath}Keras Mnist CNN.json";
 
 		static void Main (string[] args) {
 			Console.Title = nameof (ConsoleApp1);
-			MnistCNN ();
+			Stopwatch stopWatch = new Stopwatch ();
+			stopWatch.Start ();
+			switch (2) {
+				case 0:
+					NeuralNetwork.H5ToJson (H5Path, new StreamWriter (JsonPath));
+					NeuralNetwork.LoadJsonFile (JsonPath);
+					break;
+				case 1:
+					NeuralNetwork.LoadJsonFile (JsonPath);
+					break;
+				case 2:
+					NeuralNetwork.LoadH5 (H5Path);
+					break;
+			}
+			stopWatch.Stop ();
+			long loadTotalMilliseconds = stopWatch.ElapsedMilliseconds;
+			NeuralNetwork.Summary ();
+			long predictTotalMilliseconds = 0;
+			for (int i = 0; i < 10; i++) {
+				stopWatch.Restart ();
+				Console.Write ($"实际：{i} 预测：{NeuralNetwork.PredictClasses (ConvertGrayImage (new Bitmap ($@"{AssetsPath}Mnist\{i}.jpg")))} ");
+				stopWatch.Stop ();
+				predictTotalMilliseconds += stopWatch.ElapsedMilliseconds;
+				Console.WriteLine ($"耗时：{stopWatch.ElapsedMilliseconds}");
+			}
+			Console.WriteLine ($"加载耗时：{loadTotalMilliseconds} 预测耗时：{predictTotalMilliseconds} 总耗时：{loadTotalMilliseconds + predictTotalMilliseconds}");
 			Console.ReadLine ();
-		}
-
-		static void MnistCNN () {
-			NeuralNetwork.Load (@"Keras Mnist CNN.h5");
-			NeuralNetwork.Summary ();
-			Stopwatch stopwatch = new Stopwatch ();
-			stopwatch.Start ();
-			for (int i = 0; i < 10; i++) {
-				Console.WriteLine ($"实际：{i} 预测：{NeuralNetwork.PredictClasses (ConvertGrayImage (new Bitmap ($"{i}.jpg")))}");
-			}
-			stopwatch.Stop ();
-			Console.WriteLine ($"耗时：{stopwatch.ElapsedMilliseconds}毫秒");
-		}
-
-		static void Test () {
-			NeuralNetwork.Load (@"Test.h5");
-			NeuralNetwork.Summary ();
-			Stopwatch stopwatch = new Stopwatch ();
-			stopwatch.Start ();
-			for (int i = 0; i < 10; i++) {
-				Console.WriteLine ($"实际：{i} 预测：{NeuralNetwork.PredictClasses (ConvertGrayImage (new Bitmap ($"{i}.jpg")))}");
-			}
-			stopwatch.Stop ();
-			Console.WriteLine ($"耗时：{stopwatch.ElapsedMilliseconds}毫秒");
 		}
 
 		static float[] ConvertImage (Bitmap bitmap) {

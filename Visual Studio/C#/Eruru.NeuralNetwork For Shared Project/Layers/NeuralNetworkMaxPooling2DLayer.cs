@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Eruru.NeuralNetwork {
 
-	public class NeuralNetworkMaxPooling2DLayer : NeuralNetworkLayer {
+	public class NeuralNetworkMaxPooling2DLayer : NeuralNetworkLayerBase {
 
 		public int Width;
 		public int Height;
@@ -11,7 +11,7 @@ namespace Eruru.NeuralNetwork {
 		public int StrideY;
 		public NeuralNetworkPaddingType PaddingType;
 
-		public NeuralNetworkMaxPooling2DLayer (int width, int height, int strideX, int strideY, NeuralNetworkPaddingType paddingType, int[] inputShape, int[] outputShape) : base (inputShape, outputShape) {
+		public NeuralNetworkMaxPooling2DLayer (int[] inputShape, int[] outputShape, int width, int height, int strideX, int strideY, NeuralNetworkPaddingType paddingType) : base (inputShape, outputShape) {
 			if (inputShape is null) {
 				throw new ArgumentNullException (nameof (inputShape));
 			}

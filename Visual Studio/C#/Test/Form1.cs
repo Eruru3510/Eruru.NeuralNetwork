@@ -7,18 +7,18 @@ namespace WindowsFormsApp1 {
 
 	public partial class Form1 : Form {
 
-		NeuralNetwork NeuralNetwork;
+		readonly NeuralNetwork NeuralNetwork = new NeuralNetwork ();
+		readonly int Radius = 5;
+
 		Graphics Graphics;
 		bool IsDraring;
-		int Radius = 5;
 
 		public Form1 () {
 			InitializeComponent ();
 		}
 
 		private void Form1_Load (object sender, EventArgs e) {
-			NeuralNetwork = new NeuralNetwork ();
-			NeuralNetwork.Load (@"Keras Mnist CNN.h5");
+			NeuralNetwork.LoadH5 (@"..\..\..\Assets\Keras Mnist CNN.h5");
 			NeuralNetwork.Summary ();
 			Clear ();
 		}
@@ -57,17 +57,6 @@ namespace WindowsFormsApp1 {
 			Graphics graphics = Graphics.FromImage (newBitmap);
 			graphics.DrawImage (bitmap, 0, 0, newBitmap.Width, newBitmap.Height);
 			return newBitmap;
-		}
-
-		float[] ParseImage (Bitmap bitmap) {
-			float[] values = new float[bitmap.Width * bitmap.Height];
-			for (int y = 0; y < bitmap.Height; y++) {
-				for (int x = 0; x < bitmap.Width; x++) {
-					Color color = bitmap.GetPixel (x, y);
-					values[y * bitmap.Width + x] = color.GetBrightness ();
-				}
-			}
-			return values;
 		}
 
 		static float[,,] ParseGrayImage (Bitmap bitmap) {

@@ -2,11 +2,9 @@
 
 namespace Eruru.NeuralNetwork {
 
-	public class NeuralNetworkDropoutLayer : NeuralNetworkLayer {
+	public class NeuralNetworkDropoutLayer : NeuralNetworkLayerBase {
 
-		readonly float Rate;
-
-		public NeuralNetworkDropoutLayer (float rate, int[] inputShape, int[] outputShape) : base (inputShape, outputShape) {
+		public NeuralNetworkDropoutLayer (int[] inputShape, int[] outputShape) : base (inputShape, outputShape) {
 			if (inputShape is null) {
 				throw new ArgumentNullException (nameof (inputShape));
 			}
@@ -14,7 +12,6 @@ namespace Eruru.NeuralNetwork {
 				throw new ArgumentNullException (nameof (outputShape));
 			}
 			Type = NeuralNetworkLayerType.Dropout;
-			Rate = rate;
 		}
 
 		public override object ForwardPropagation (object inputs) {
