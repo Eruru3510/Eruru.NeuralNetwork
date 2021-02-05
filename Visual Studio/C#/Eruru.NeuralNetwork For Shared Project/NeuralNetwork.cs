@@ -9,22 +9,24 @@ namespace Eruru.NeuralNetwork {
 
 		public List<NeuralNetworkLayerBase> Layers { get; set; } = new List<NeuralNetworkLayerBase> ();
 
-		public void Load (INeuralNetworkLoader loader, JsonObject output = null) {
+		public void Load (INeuralNetworkLoader loader, JsonTextWriter textWriter = null) {
 			if (loader is null) {
 				throw new ArgumentNullException (nameof (loader));
 			}
 			JsonObject modelConfig = loader.GetModelConfig ();
-			if (output != null) {
-				output[NeuralNetworkKeyword.ModelConfig] = modelConfig;
+			if (textWriter != null) {
+				textWriter.BeginObject ();
+				textWriter.Write (NeuralNetworkKeyword.ModelConfig);
+				new JsonTextBuilder (new JsonValueReader (modelConfig), textWriter).BuildObject ();
 			}
 			int[] inputShape = null;
 			Layers.Clear ();
 			foreach (JsonObject layer in modelConfig["config"]["layers"].Array) {
-				JsonObject config = layer["config"];
 				string className = layer["class_name"];
 				if (className == "InputLayer") {
 					continue;
 				}
+				JsonObject config = layer["config"];
 				string name = config["name"];
 				JsonValue activation = config["activation"];
 				JsonValue dataFormat = config["data_format"];
@@ -40,9 +42,8 @@ namespace Eruru.NeuralNetwork {
 						int units = config["units"];
 						float[,] weights = loader.GetDenseWeights (name, units, inputShape[0]);
 						float[] biases = loader.GetBiases (name, units);
-						if (output != null) {
-							output[name]["kernel"] = JsonConvert.SerializeArray (weights);
-							output[name]["bias"] = JsonConvert.SerializeArray (biases);
+						if (textWriter != null) {
+							WriteLayer (textWriter, name, weights, biases);
 						}
 						Neuron[] neurons = new Neuron[units];
 						for (int i = 0; i < neurons.Length; i++) {
@@ -72,9 +73,8 @@ namespace Eruru.NeuralNetwork {
 						int strideY = strides[0];
 						float[,,,] weights = loader.GetConv2DWeights (name, width, height, channel, units);
 						float[] biases = loader.GetBiases (name, units);
-						if (output != null) {
-							output[name]["kernel"] = JsonConvert.SerializeArray (weights);
-							output[name]["bias"] = JsonConvert.SerializeArray (biases);
+						if (textWriter != null) {
+							WriteLayer (textWriter, name, weights, biases);
 						}
 						Kernel[] kernels = new Kernel[units];
 						for (int i = 0; i < kernels.Length; i++) {
@@ -140,6 +140,9 @@ namespace Eruru.NeuralNetwork {
 						throw new NotImplementedException (className);
 				}
 			}
+			if (textWriter != null) {
+				textWriter.EndObject ();
+			}
 		}
 
 		public void LoadH5 (string path) {
@@ -179,10 +182,10 @@ namespace Eruru.NeuralNetwork {
 			if (textWriter is null) {
 				throw new ArgumentNullException (nameof (textWriter));
 			}
-			using (NeuralNetworkH5Loader loader = new NeuralNetworkH5Loader (h5Path)) {
-				JsonObject data = new JsonObject ();
-				new NeuralNetwork ().Load (loader, data);
-				data.Serialize (textWriter);
+			using (JsonTextWriter jsonTextWriter = new JsonTextWriter (textWriter)) {
+				using (NeuralNetworkH5Loader loader = new NeuralNetworkH5Loader (h5Path)) {
+					new NeuralNetwork ().Load (loader, jsonTextWriter);
+				}
 			}
 		}
 
@@ -222,6 +225,16 @@ namespace Eruru.NeuralNetwork {
 				throw new ArgumentNullException (nameof (inputs));
 			}
 			return NeuralNetworkAPI.IndexOfMax ((float[])ForwardPropagation (inputs));
+		}
+
+		void WriteLayer (JsonTextWriter textWriter, string name, object weights, float[] biases) {
+			textWriter.Write (name);
+			textWriter.BeginObject ();
+			textWriter.Write ("kernel");
+			new JsonTextBuilder (new JsonSerializer (weights), textWriter).BuildArray ();
+			textWriter.Write ("bias");
+			new JsonTextBuilder (new JsonSerializer (biases), textWriter).BuildArray ();
+			textWriter.EndObject ();
 		}
 
 	}

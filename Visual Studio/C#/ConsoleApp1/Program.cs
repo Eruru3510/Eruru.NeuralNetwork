@@ -17,7 +17,7 @@ namespace ConsoleApp1 {
 			Console.Title = nameof (ConsoleApp1);
 			Stopwatch stopWatch = new Stopwatch ();
 			stopWatch.Start ();
-			switch (2) {
+			switch (0) {
 				case 0:
 					NeuralNetwork.H5ToJson (H5Path, new StreamWriter (JsonPath));
 					NeuralNetwork.LoadJsonFile (JsonPath);

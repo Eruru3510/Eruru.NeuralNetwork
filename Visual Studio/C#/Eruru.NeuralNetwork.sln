@@ -9,11 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{07BA1C8C-73D0-40B6-9ADA-18B7BB456E62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eruru.NeuralNetwork_For_.NET_Framework_4", "Eruru.NeuralNetwork For .NET Framework 4\Eruru.NeuralNetwork_For_.NET_Framework_4.csproj", "{0EADC688-2260-4761-837D-2CA1454E06FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eruru.NeuralNetwork", "Eruru.NeuralNetwork\Eruru.NeuralNetwork.csproj", "{3ED580E8-B664-47C5-9C47-EBB0BC4D6391}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Eruru.NeuralNetwork For Shared Project\Eruru.NeuralNetwork For Shared Project.projitems*{0eadc688-2260-4761-837d-2ca1454e06ff}*SharedItemsImports = 4
+		Eruru.NeuralNetwork For Shared Project\Eruru.NeuralNetwork For Shared Project.projitems*{3ed580e8-b664-47c5-9c47-ebb0bc4d6391}*SharedItemsImports = 5
 		Eruru.NeuralNetwork For Shared Project\Eruru.NeuralNetwork For Shared Project.projitems*{55bac478-69b9-43a6-a0d5-6bcde63e2b0b}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{07BA1C8C-73D0-40B6-9ADA-18B7BB456E62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07BA1C8C-73D0-40B6-9ADA-18B7BB456E62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07BA1C8C-73D0-40B6-9ADA-18B7BB456E62}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0EADC688-2260-4761-837D-2CA1454E06FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0EADC688-2260-4761-837D-2CA1454E06FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0EADC688-2260-4761-837D-2CA1454E06FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0EADC688-2260-4761-837D-2CA1454E06FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ED580E8-B664-47C5-9C47-EBB0BC4D6391}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ED580E8-B664-47C5-9C47-EBB0BC4D6391}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ED580E8-B664-47C5-9C47-EBB0BC4D6391}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED580E8-B664-47C5-9C47-EBB0BC4D6391}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

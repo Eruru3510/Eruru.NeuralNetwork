@@ -81,9 +81,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Eruru.NeuralNetwork For .NET Framework 4\Eruru.NeuralNetwork_For_.NET_Framework_4.csproj">
-      <Project>{0eadc688-2260-4761-837d-2ca1454e06ff}</Project>
-      <Name>Eruru.NeuralNetwork_For_.NET_Framework_4</Name>
+    <ProjectReference Include="..\Eruru.NeuralNetwork\Eruru.NeuralNetwork.csproj">
+      <Project>{3ed580e8-b664-47c5-9c47-ebb0bc4d6391}</Project>
+      <Name>Eruru.NeuralNetwork</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
