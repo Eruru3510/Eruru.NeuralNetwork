@@ -12,24 +12,25 @@
     <Compile Include="$(MSBuildThisFileDirectory)Kernel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NeuralNetwork.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\NeuralNetworkActivationFunction.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Layers\NeuralNetworkConv2DLayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\NeuralNetworkDataFormatType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Layers\NeuralNetworkDenseLayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Layers\NeuralNetworkDropoutLayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Layers\NeuralNetworkFlattenLayer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkH5Loader.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkJsonLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Loaders\NeuralNetworkH5Loader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Loaders\NeuralNetworkJsonLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkKeyword.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkLayerBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Layers\NeuralNetworkLayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\NeuralNetworkLayerType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Layers\NeuralNetworkMaxPooling2DLayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\NeuralNetworkPaddingType.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)INeuralNetworkLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Loaders\INeuralNetworkLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Neuron.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Layers\" />
     <Folder Include="$(MSBuildThisFileDirectory)Enums\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Loaders\" />
   </ItemGroup>
 </Project>

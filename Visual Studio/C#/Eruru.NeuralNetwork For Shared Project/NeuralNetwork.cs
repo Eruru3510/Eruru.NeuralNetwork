@@ -7,7 +7,7 @@ namespace Eruru.NeuralNetwork {
 
 	public class NeuralNetwork {
 
-		public List<NeuralNetworkLayerBase> Layers { get; set; } = new List<NeuralNetworkLayerBase> ();
+		public List<NeuralNetworkLayer> Layers { get; set; } = new List<NeuralNetworkLayer> ();
 
 		public void Load (INeuralNetworkLoader loader, JsonTextWriter textWriter = null) {
 			if (loader is null) {
@@ -57,7 +57,7 @@ namespace Eruru.NeuralNetwork {
 							inputShape,
 							outputShape,
 							neurons,
-							NeuralNetworkAPI.GetActivationFunctionType (activation)
+							NeuralNetworkApi.GetActivationFunctionType (activation)
 						));
 						inputShape = outputShape;
 						break;
@@ -87,17 +87,17 @@ namespace Eruru.NeuralNetwork {
 								}
 							}
 						}
-						NeuralNetworkPaddingType paddingType = NeuralNetworkAPI.GetPaddingType (padding);
+						NeuralNetworkPaddingType paddingType = NeuralNetworkApi.GetPaddingType (padding);
 						int[] outputShape = new int[] {
-							NeuralNetworkAPI.CalculateOutputLength (inputShape[0], height, strideY, paddingType),
-							NeuralNetworkAPI.CalculateOutputLength (inputShape[1], width, strideX, paddingType),
+							NeuralNetworkApi.CalculateOutputLength (inputShape[0], height, strideY, paddingType),
+							NeuralNetworkApi.CalculateOutputLength (inputShape[1], width, strideX, paddingType),
 							units
 						};
 						Layers.Add (new NeuralNetworkConv2DLayer (
 							inputShape,
 							outputShape,
 							kernels,
-							NeuralNetworkAPI.GetActivationFunctionType (activation),
+							NeuralNetworkApi.GetActivationFunctionType (activation),
 							paddingType
 						));
 						inputShape = outputShape;
@@ -110,10 +110,10 @@ namespace Eruru.NeuralNetwork {
 						int height = poolSize[0];
 						int strideX = strides[1];
 						int strideY = strides[0];
-						NeuralNetworkPaddingType paddingType = NeuralNetworkAPI.GetPaddingType (padding);
+						NeuralNetworkPaddingType paddingType = NeuralNetworkApi.GetPaddingType (padding);
 						int[] outputShape = new int[] {
-							NeuralNetworkAPI.CalculateOutputLength (inputShape[0], height, strideY, paddingType),
-							NeuralNetworkAPI.CalculateOutputLength (inputShape[1], width, strideX, paddingType),
+							NeuralNetworkApi.CalculateOutputLength (inputShape[0], height, strideY, paddingType),
+							NeuralNetworkApi.CalculateOutputLength (inputShape[1], width, strideX, paddingType),
 							inputShape[2]
 						};
 						Layers.Add (new NeuralNetworkMaxPooling2DLayer (inputShape, outputShape, width, height, strideX, strideY, paddingType));
@@ -125,9 +125,9 @@ namespace Eruru.NeuralNetwork {
 						break;
 					}
 					case nameof (NeuralNetworkLayerType.Flatten): {
-						NeuralNetworkDataFormatType dataFormatType = NeuralNetworkAPI.GetDataFormatType (config["data_format"]);
+						NeuralNetworkDataFormatType dataFormatType = NeuralNetworkApi.GetDataFormatType (config["data_format"]);
 						int sum = 1;
-						NeuralNetworkLayerBase lastLayer = Layers[Layers.Count - 1];
+						NeuralNetworkLayer lastLayer = Layers[Layers.Count - 1];
 						foreach (int length in lastLayer.OutputShape) {
 							sum *= length;
 						}
@@ -190,21 +190,21 @@ namespace Eruru.NeuralNetwork {
 		}
 
 		public void Summary () {
-			Console.Write (NeuralNetworkAPI.PadRight ("层"));
-			Console.Write (NeuralNetworkAPI.PadRight ("输入"));
-			Console.Write (NeuralNetworkAPI.PadRight ("神经元"));
-			Console.Write (NeuralNetworkAPI.PadRight ("激活函数"));
-			Console.Write (NeuralNetworkAPI.PadRight ("Padding"));
-			Console.Write (NeuralNetworkAPI.PadRight ("输出"));
+			Console.Write (NeuralNetworkApi.PadRight ("层"));
+			Console.Write (NeuralNetworkApi.PadRight ("输入"));
+			Console.Write (NeuralNetworkApi.PadRight ("神经元"));
+			Console.Write (NeuralNetworkApi.PadRight ("激活函数"));
+			Console.Write (NeuralNetworkApi.PadRight ("Padding"));
+			Console.Write (NeuralNetworkApi.PadRight ("输出"));
 			Console.WriteLine ();
 			foreach (var layer in Layers) {
-				Console.Write (NeuralNetworkAPI.PadRight (layer.Type));
-				Console.Write (NeuralNetworkAPI.PadRight (NeuralNetworkAPI.Shape (layer.InputShape)));
+				Console.Write (NeuralNetworkApi.PadRight (layer.Type));
+				Console.Write (NeuralNetworkApi.PadRight (NeuralNetworkApi.Shape (layer.InputShape)));
 				layer.Summary (out object neuronColumn, out object activationFunctionColumn, out object paddingColumn);
-				Console.Write (NeuralNetworkAPI.PadRight (neuronColumn));
-				Console.Write (NeuralNetworkAPI.PadRight (activationFunctionColumn));
-				Console.Write (NeuralNetworkAPI.PadRight (paddingColumn));
-				Console.Write (NeuralNetworkAPI.PadRight (NeuralNetworkAPI.Shape (layer.OutputShape)));
+				Console.Write (NeuralNetworkApi.PadRight (neuronColumn));
+				Console.Write (NeuralNetworkApi.PadRight (activationFunctionColumn));
+				Console.Write (NeuralNetworkApi.PadRight (paddingColumn));
+				Console.Write (NeuralNetworkApi.PadRight (NeuralNetworkApi.Shape (layer.OutputShape)));
 				Console.WriteLine ();
 			}
 		}
@@ -224,7 +224,7 @@ namespace Eruru.NeuralNetwork {
 			if (inputs is null) {
 				throw new ArgumentNullException (nameof (inputs));
 			}
-			return NeuralNetworkAPI.IndexOfMax ((float[])ForwardPropagation (inputs));
+			return NeuralNetworkApi.IndexOfMax ((float[])ForwardPropagation (inputs));
 		}
 
 		void WriteLayer (JsonTextWriter textWriter, string name, object weights, float[] biases) {

@@ -2,7 +2,7 @@
 
 namespace Eruru.NeuralNetwork {
 
-	public class NeuralNetworkFlattenLayer : NeuralNetworkLayerBase {
+	public class NeuralNetworkFlattenLayer : NeuralNetworkLayer {
 
 		public NeuralNetworkDataFormatType DataFormatType { get; set; }
 

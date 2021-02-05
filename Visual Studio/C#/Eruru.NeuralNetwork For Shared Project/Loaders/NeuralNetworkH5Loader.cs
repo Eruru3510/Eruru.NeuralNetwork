@@ -20,14 +20,14 @@ namespace Eruru.NeuralNetwork {
 		}
 
 		public JsonObject GetModelConfig () {
-			return JsonObject.Parse (NeuralNetworkAPI.GetAttributeValue (H5GroupId, NeuralNetworkKeyword.ModelConfig));
+			return JsonObject.Parse (NeuralNetworkApi.GetAttributeValue (H5GroupId, NeuralNetworkKeyword.ModelConfig));
 		}
 
 		public float[,] GetDenseWeights (string name, int units, int inputShape) {
 			if (name is null) {
 				throw new ArgumentNullException (nameof (name));
 			}
-			NeuralNetworkAPI.GetDataSet (H5GroupIdModelWeights, $"{name}/{name}/kernel:0", out float[,] weights, units, inputShape);
+			NeuralNetworkApi.GetDataSet (H5GroupIdModelWeights, $"{name}/{name}/kernel:0", out float[,] weights, units, inputShape);
 			return weights;
 		}
 
@@ -35,7 +35,7 @@ namespace Eruru.NeuralNetwork {
 			if (name is null) {
 				throw new ArgumentNullException (nameof (name));
 			}
-			NeuralNetworkAPI.GetDataSet (H5GroupIdModelWeights, $"{name}/{name}/kernel:0", out float[,,,] weights, width, height, channel, units);
+			NeuralNetworkApi.GetDataSet (H5GroupIdModelWeights, $"{name}/{name}/kernel:0", out float[,,,] weights, width, height, channel, units);
 			return weights;
 		}
 
@@ -43,7 +43,7 @@ namespace Eruru.NeuralNetwork {
 			if (name is null) {
 				throw new ArgumentNullException (nameof (name));
 			}
-			NeuralNetworkAPI.GetDataSet (H5GroupIdModelWeights, $"{name}/{name}/bias:0", out float[] biases, units);
+			NeuralNetworkApi.GetDataSet (H5GroupIdModelWeights, $"{name}/{name}/bias:0", out float[] biases, units);
 			return biases;
 		}
 

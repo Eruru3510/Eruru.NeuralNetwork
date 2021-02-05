@@ -5,7 +5,7 @@ using HDF5DotNet;
 
 namespace Eruru.NeuralNetwork {
 
-	static class NeuralNetworkAPI {
+	static class NeuralNetworkApi {
 
 		static readonly Encoding GBK = Encoding.GetEncoding ("GBK");
 

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Eruru.NeuralNetwork {
 
-	public class NeuralNetworkConv2DLayer : NeuralNetworkLayerBase {
+	public class NeuralNetworkConv2DLayer : NeuralNetworkLayer {
 
 		public Kernel[] Kernels { get; set; }
 		public NeuralNetworkActivationFunctionType ActivationFunctionType { get; set; }

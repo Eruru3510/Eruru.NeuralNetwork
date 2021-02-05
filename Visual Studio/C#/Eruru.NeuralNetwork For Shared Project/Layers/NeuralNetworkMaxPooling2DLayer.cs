@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Eruru.NeuralNetwork {
 
-	public class NeuralNetworkMaxPooling2DLayer : NeuralNetworkLayerBase {
+	public class NeuralNetworkMaxPooling2DLayer : NeuralNetworkLayer {
 
 		public int Width;
 		public int Height;

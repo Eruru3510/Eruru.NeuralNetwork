@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Eruru.NeuralNetwork {
 
-	public class NeuralNetworkDenseLayer : NeuralNetworkLayerBase {
+	public class NeuralNetworkDenseLayer : NeuralNetworkLayer {
 
 		public NeuralNetworkActivationFunctionType ActivationFunctionType { get; set; }
 		public Neuron[] Neurons { get; set; }
@@ -30,7 +30,7 @@ namespace Eruru.NeuralNetwork {
 				case NeuralNetworkActivationFunctionType.ReLU:
 					break;
 				case NeuralNetworkActivationFunctionType.Softmax: {
-					float max = NeuralNetworkAPI.Max (outputs);
+					float max = NeuralNetworkApi.Max (outputs);
 					float sum = 0;
 					for (int i = 0; i < outputs.Length; i++) {
 						outputs[i] = (float)Math.Exp (outputs[i] - max);

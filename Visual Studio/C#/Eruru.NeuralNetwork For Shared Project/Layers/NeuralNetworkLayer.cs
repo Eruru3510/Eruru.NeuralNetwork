@@ -2,13 +2,13 @@
 
 namespace Eruru.NeuralNetwork {
 
-	public abstract class NeuralNetworkLayerBase {
+	public abstract class NeuralNetworkLayer {
 
 		public NeuralNetworkLayerType Type { get; set; }
 		public int[] InputShape { get; set; }
 		public int[] OutputShape { get; set; }
 
-		public NeuralNetworkLayerBase (int[] inputShape, int[] outputShape) {
+		public NeuralNetworkLayer (int[] inputShape, int[] outputShape) {
 			InputShape = inputShape ?? throw new ArgumentNullException (nameof (inputShape));
 			OutputShape = outputShape ?? throw new ArgumentNullException (nameof (outputShape));
 		}

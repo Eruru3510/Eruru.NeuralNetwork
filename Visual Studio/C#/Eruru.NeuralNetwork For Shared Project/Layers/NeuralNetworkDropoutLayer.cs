@@ -2,7 +2,7 @@
 
 namespace Eruru.NeuralNetwork {
 
-	public class NeuralNetworkDropoutLayer : NeuralNetworkLayerBase {
+	public class NeuralNetworkDropoutLayer : NeuralNetworkLayer {
 
 		public NeuralNetworkDropoutLayer (int[] inputShape, int[] outputShape) : base (inputShape, outputShape) {
 			if (inputShape is null) {

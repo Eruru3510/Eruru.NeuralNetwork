@@ -15,7 +15,7 @@
 			for (int i = 0; i < Weights.Length; i++) {
 				sum += inputs[i] * Weights[i];
 			};
-			return NeuralNetworkAPI.ActivationFunction (activationFunctionType, sum + Bias);
+			return NeuralNetworkApi.ActivationFunction (activationFunctionType, sum + Bias);
 		}
 
 	}

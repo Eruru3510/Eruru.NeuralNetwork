@@ -60,7 +60,7 @@ namespace Eruru.NeuralNetwork {
 							}
 						}
 					}
-					outputs[outputY, outputX, channel] = NeuralNetworkAPI.ActivationFunction (activationFunctionType, sum + Bias);
+					outputs[outputY, outputX, channel] = NeuralNetworkApi.ActivationFunction (activationFunctionType, sum + Bias);
 				}
 				outputX = 0;
 			}
