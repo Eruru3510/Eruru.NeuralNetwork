@@ -1,14 +1,16 @@
 ﻿using System;
+#if NET40_OR_GREATER
 using System.Threading.Tasks;
+#endif
 
 namespace Eruru.NeuralNetwork {
 
 	public class NeuralNetworkDenseLayer : NeuralNetworkLayer {
 
 		public NeuralNetworkActivationFunctionType ActivationFunctionType { get; set; }
-		public Neuron[] Neurons { get; set; }
+		public NeuralNetworkNeuron[] Neurons { get; set; }
 
-		public NeuralNetworkDenseLayer (int[] inputShape, int[] outputShape, Neuron[] neurons, NeuralNetworkActivationFunctionType activationFunctionType) : base (inputShape, outputShape) {
+		public NeuralNetworkDenseLayer (int[] inputShape, int[] outputShape, NeuralNetworkNeuron[] neurons, NeuralNetworkActivationFunctionType activationFunctionType) : base (inputShape, outputShape) {
 			if (inputShape is null) {
 				throw new ArgumentNullException (nameof (inputShape));
 			}
@@ -23,9 +25,15 @@ namespace Eruru.NeuralNetwork {
 		public override object ForwardPropagation (object inputs) {
 			float[] inputValues = (float[])inputs;
 			float[] outputs = new float[Neurons.Length];
+#if NET40_OR_GREATER
 			Parallel.For (0, Neurons.Length, i => {
 				outputs[i] = Neurons[i].ForwardPropagation (ref inputValues, ActivationFunctionType);
 			});
+#else
+			for (int i = 0; i < Neurons.Length; i++) {
+				outputs[i] = Neurons[i].ForwardPropagation (ref inputValues, ActivationFunctionType);
+			}
+#endif
 			switch (ActivationFunctionType) {
 				case NeuralNetworkActivationFunctionType.ReLU:
 					break;
@@ -41,6 +49,8 @@ namespace Eruru.NeuralNetwork {
 					}
 					break;
 				}
+				case NeuralNetworkActivationFunctionType.Sigmoid:
+					break;
 				default:
 					throw new NotImplementedException (ActivationFunctionType.ToString ());
 			}

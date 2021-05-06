@@ -9,7 +9,7 @@
     <Import_RootNamespace>Eruru.NeuralNetwork</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Kernel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkKernel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NeuralNetwork.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\NeuralNetworkActivationFunction.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkApi.cs" />
@@ -20,13 +20,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Layers\NeuralNetworkFlattenLayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Loaders\NeuralNetworkH5Loader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Loaders\NeuralNetworkJsonLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkKeyword.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Layers\NeuralNetworkLayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\NeuralNetworkLayerType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Layers\NeuralNetworkMaxPooling2DLayer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\NeuralNetworkPaddingType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Loaders\INeuralNetworkLoader.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Neuron.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NeuralNetworkNeuron.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Layers\" />

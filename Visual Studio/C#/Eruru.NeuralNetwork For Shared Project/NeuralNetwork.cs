@@ -33,8 +33,8 @@ namespace Eruru.NeuralNetwork {
 				JsonValue padding = config["padding"];
 				if (inputShape is null) {
 					JsonArray batchInputShape = config["batch_input_shape"];
+					batchInputShape.RemoveAt (0);
 					List<int> inputShapes = JsonConvert.Deserialize<List<int>> (batchInputShape);
-					inputShapes.RemoveAt (0);
 					inputShape = inputShapes.ToArray ();
 				}
 				switch (className) {
@@ -45,9 +45,9 @@ namespace Eruru.NeuralNetwork {
 						if (textWriter != null) {
 							WriteLayer (textWriter, name, weights, biases);
 						}
-						Neuron[] neurons = new Neuron[units];
+						NeuralNetworkNeuron[] neurons = new NeuralNetworkNeuron[units];
 						for (int i = 0; i < neurons.Length; i++) {
-							neurons[i] = new Neuron (inputShape[0], biases[i]);
+							neurons[i] = new NeuralNetworkNeuron (inputShape[0], biases[i]);
 							for (int n = 0; n < inputShape[0]; n++) {
 								neurons[i].Weights[n] = weights[n, i];
 							}
@@ -76,9 +76,9 @@ namespace Eruru.NeuralNetwork {
 						if (textWriter != null) {
 							WriteLayer (textWriter, name, weights, biases);
 						}
-						Kernel[] kernels = new Kernel[units];
+						NeuralNetworkKernel[] kernels = new NeuralNetworkKernel[units];
 						for (int i = 0; i < kernels.Length; i++) {
-							kernels[i] = new Kernel (width, height, channel, strideX, strideY, biases[i]);
+							kernels[i] = new NeuralNetworkKernel (width, height, channel, strideX, strideY, biases[i]);
 							for (int c = 0; c < channel; c++) {
 								for (int y = 0; y < height; y++) {
 									for (int x = 0; x < width; x++) {
@@ -145,6 +145,7 @@ namespace Eruru.NeuralNetwork {
 			}
 		}
 
+#if NET40_OR_GREATER
 		public void LoadH5 (string path) {
 			if (path is null) {
 				throw new ArgumentNullException (nameof (path));
@@ -153,6 +154,21 @@ namespace Eruru.NeuralNetwork {
 				Load (loader);
 			}
 		}
+
+		public static void H5ToJson (string h5Path, TextWriter textWriter) {
+			if (h5Path is null) {
+				throw new ArgumentNullException (nameof (h5Path));
+			}
+			if (textWriter is null) {
+				throw new ArgumentNullException (nameof (textWriter));
+			}
+			using (JsonTextWriter jsonTextWriter = new JsonTextWriter (textWriter)) {
+				using (NeuralNetworkH5Loader loader = new NeuralNetworkH5Loader (h5Path)) {
+					new NeuralNetwork ().Load (loader, jsonTextWriter);
+				}
+			}
+		}
+#endif
 
 		public void LoadJson (string text) {
 			if (text is null) {
@@ -173,20 +189,6 @@ namespace Eruru.NeuralNetwork {
 				throw new ArgumentNullException (nameof (path));
 			}
 			LoadJson (new StreamReader (path));
-		}
-
-		public static void H5ToJson (string h5Path, TextWriter textWriter) {
-			if (h5Path is null) {
-				throw new ArgumentNullException (nameof (h5Path));
-			}
-			if (textWriter is null) {
-				throw new ArgumentNullException (nameof (textWriter));
-			}
-			using (JsonTextWriter jsonTextWriter = new JsonTextWriter (textWriter)) {
-				using (NeuralNetworkH5Loader loader = new NeuralNetworkH5Loader (h5Path)) {
-					new NeuralNetwork ().Load (loader, jsonTextWriter);
-				}
-			}
 		}
 
 		public void Summary () {
@@ -225,6 +227,13 @@ namespace Eruru.NeuralNetwork {
 				throw new ArgumentNullException (nameof (inputs));
 			}
 			return NeuralNetworkApi.IndexOfMax ((float[])ForwardPropagation (inputs));
+		}
+
+		public float Predict (object inputs) {
+			if (inputs is null) {
+				throw new ArgumentNullException (nameof (inputs));
+			}
+			return ((float[])ForwardPropagation (inputs))[0];
 		}
 
 		void WriteLayer (JsonTextWriter textWriter, string name, object weights, float[] biases) {

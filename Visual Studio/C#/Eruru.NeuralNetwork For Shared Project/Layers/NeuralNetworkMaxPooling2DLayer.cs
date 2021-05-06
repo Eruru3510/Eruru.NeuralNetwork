@@ -1,5 +1,7 @@
 ﻿using System;
+#if NET40_OR_GREATER
 using System.Threading.Tasks;
+#endif
 
 namespace Eruru.NeuralNetwork {
 
@@ -52,6 +54,7 @@ namespace Eruru.NeuralNetwork {
 			int endX = inputWidth + paddingX - Width;
 			int endY = inputHeight + paddingY - Height;
 			float[,,] outputs = new float[outputHeight, outputWidth, inputChannel];
+#if NET40_OR_GREATER
 			Parallel.For (0, inputChannel, c => {
 				int outputX = 0;
 				int outputY = 0;
@@ -80,6 +83,36 @@ namespace Eruru.NeuralNetwork {
 					outputX = 0;
 				}
 			});
+#else
+			for (int c = 0; c < inputChannel; c++) {
+				int outputX = 0;
+				int outputY = 0;
+				for (int y = startY; y <= endY; y += StrideY, outputY++) {
+					for (int x = startX; x <= endX; x += StrideX, outputX++) {
+						bool first = true;
+						float max = 0;
+						int ex = x + Width;
+						int eY = y + Height;
+						for (int cy = y; cy < eY; cy++) {
+							for (int cx = x; cx < ex; cx++) {
+								float value;
+								if (cy < 0 || cy >= endY || cx < 0 || cx >= endX) {
+									value = 0;
+								} else {
+									value = inputValues[cy, cx, c];
+								}
+								if (first || max < value) {
+									first = false;
+									max = value;
+								}
+							}
+						}
+						outputs[outputY, outputX, c] = max;
+					}
+					outputX = 0;
+				}
+			}
+#endif
 			return outputs;
 		}
 

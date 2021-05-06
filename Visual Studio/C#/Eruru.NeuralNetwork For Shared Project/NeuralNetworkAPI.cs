@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Text;
+#if NET40_OR_GREATER
 using HDF5DotNet;
+#endif
 
 namespace Eruru.NeuralNetwork {
 
@@ -37,6 +39,8 @@ namespace Eruru.NeuralNetwork {
 					return value < 0 ? 0 : value;
 				case NeuralNetworkActivationFunctionType.Softmax:
 					return value;
+				case NeuralNetworkActivationFunctionType.Sigmoid:
+					return (float)(1 / (1 + Math.Exp (-value)));
 				default:
 					throw new NotImplementedException (type.ToString ());
 			}
@@ -76,6 +80,8 @@ namespace Eruru.NeuralNetwork {
 					return NeuralNetworkActivationFunctionType.ReLU;
 				case "softmax":
 					return NeuralNetworkActivationFunctionType.Softmax;
+				case "sigmoid":
+					return NeuralNetworkActivationFunctionType.Sigmoid;
 				default:
 					throw new NotImplementedException (name);
 			}
@@ -101,6 +107,7 @@ namespace Eruru.NeuralNetwork {
 			}
 		}
 
+#if NET40_OR_GREATER
 		public static string GetAttributeValue (H5ObjectWithAttributes objectWithAttributes, string name) {
 			if (objectWithAttributes is null) {
 				throw new ArgumentNullException (nameof (objectWithAttributes));
@@ -176,6 +183,7 @@ namespace Eruru.NeuralNetwork {
 			}
 
 		}
+#endif
 
 	}
 

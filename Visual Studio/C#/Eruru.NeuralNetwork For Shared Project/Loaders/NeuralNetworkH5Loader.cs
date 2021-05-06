@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET40_OR_GREATER
+using System;
 using Eruru.Json;
 using HDF5DotNet;
 
@@ -56,3 +57,4 @@ namespace Eruru.NeuralNetwork {
 	}
 
 }
+#endif

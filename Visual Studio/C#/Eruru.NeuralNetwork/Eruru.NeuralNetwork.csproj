@@ -1,35 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net40;net45</TargetFrameworks>
-		<Version>1.0.0.1</Version>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net40|AnyCPU'">
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<PlatformTarget>x86</PlatformTarget>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net40|AnyCPU'">
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<PlatformTarget>x86</PlatformTarget>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net45|AnyCPU'">
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<PlatformTarget>x86</PlatformTarget>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|AnyCPU'">
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<PlatformTarget>x86</PlatformTarget>
+		<TargetFrameworks>net20;net35;net40;net45;netstandard2.0</TargetFrameworks>
+		<Version>1.0.0.2</Version>
 	</PropertyGroup>
 
 	<Import Project="..\Eruru.NeuralNetwork For Shared Project\Eruru.NeuralNetwork For Shared Project.projitems" Label="Shared" />
 
 	<ItemGroup>
-		<PackageReference Include="Eruru.Json" Version="1.0.0.1" />
-		<PackageReference Include="HDF5DotNet.x86" Version="1.8.9" />
+		<PackageReference Include="Eruru.Json" Version="1.0.0.15" />
 	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net40' or '$(TargetFramework)' == 'net45'">
+		<PackageReference Include="HDF5DotNet.x86">
+			<Version>1.8.9</Version>
+		</PackageReference>
+	</ItemGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net40' or '$(TargetFramework)' == 'net45'">
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<PlatformTarget>x86</PlatformTarget>
+	</PropertyGroup>
 
 </Project>

@@ -1,15 +1,17 @@
 ﻿using System;
+#if NET40_OR_GREATER
 using System.Threading.Tasks;
+#endif
 
 namespace Eruru.NeuralNetwork {
 
 	public class NeuralNetworkConv2DLayer : NeuralNetworkLayer {
 
-		public Kernel[] Kernels { get; set; }
+		public NeuralNetworkKernel[] Kernels { get; set; }
 		public NeuralNetworkActivationFunctionType ActivationFunctionType { get; set; }
 		public NeuralNetworkPaddingType PaddingType { get; set; }
 
-		public NeuralNetworkConv2DLayer (int[] inputShape, int[] outputShape, Kernel[] kernels, NeuralNetworkActivationFunctionType activationFunctionType, NeuralNetworkPaddingType paddingType) : base (inputShape, outputShape) {
+		public NeuralNetworkConv2DLayer (int[] inputShape, int[] outputShape, NeuralNetworkKernel[] kernels, NeuralNetworkActivationFunctionType activationFunctionType, NeuralNetworkPaddingType paddingType) : base (inputShape, outputShape) {
 			if (inputShape is null) {
 				throw new ArgumentNullException (nameof (inputShape));
 			}
@@ -25,9 +27,15 @@ namespace Eruru.NeuralNetwork {
 		public override object ForwardPropagation (object inputs) {
 			float[,,] inputValues = (float[,,])inputs;
 			float[,,] outputs = new float[OutputShape[0], OutputShape[1], OutputShape[2]];
+#if NET40_OR_GREATER
 			Parallel.For (0, Kernels.Length, i => {
 				Kernels[i].ForwardPropagation (ref inputValues, ref outputs, i, ActivationFunctionType, PaddingType);
 			});
+#else
+			for (int i = 0; i < Kernels.Length; i++) {
+				Kernels[i].ForwardPropagation (ref inputValues, ref outputs, i, ActivationFunctionType, PaddingType);
+			}
+#endif
 			return outputs;
 		}
 

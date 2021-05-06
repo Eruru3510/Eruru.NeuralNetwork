@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1 {
+namespace Test {
 	static class Program {
 		/// <summary>
 		/// 应用程序的主入口点。
